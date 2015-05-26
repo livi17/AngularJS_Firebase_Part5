@@ -11,7 +11,7 @@ angular.module('myApp.register', ['ngRoute','firebase'])
 
 .controller('RegisterCtrl', ['$scope','$location','$firebaseAuth', function($scope,$location,$firebaseAuth) {
  	$scope.mesg = 'Hello';
- 	var firebaseObj = new Firebase("https://blistering-heat-2473.firebaseio.com");
+ 	var firebaseObj = new Firebase("https://yyear.firebaseio.com");
 var auth = $firebaseAuth(firebaseObj);
         $scope.signUp = function() {
     if (!$scope.regForm.$invalid) {

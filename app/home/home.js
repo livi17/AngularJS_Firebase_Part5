@@ -6,27 +6,27 @@ angular.module('myApp.home', ['ngRoute','firebase'])
   $routeProvider.when('/home', {
     templateUrl: 'home/home.html',
     controller: 'HomeCtrl'
-  });
+});
 }])
 
 .controller('HomeCtrl', ['$scope','$location','CommonProp','$firebaseAuth',function($scope,$location,CommonProp,$firebaseAuth) {
- var firebaseObj = new Firebase("https://blistering-heat-2473.firebaseio.com");
-    var loginObj = $firebaseAuth(firebaseObj);
-  
-  $scope.user = {};
-  $scope.SignIn = function(e) {
+   var firebaseObj = new Firebase("https://yyear.firebaseio.com");
+   var loginObj = $firebaseAuth(firebaseObj);
+   
+   $scope.user = {};
+   $scope.SignIn = function(e) {
     e.preventDefault();
     var username = $scope.user.email;
     var password = $scope.user.password;
     loginObj.$authWithPassword({
-            email: username,
-            password: password
-        })
-        .then(function(user) {
+        email: username,
+        password: password
+    })
+    .then(function(user) {
             //Success callback
             console.log('Authentication successful');
-	CommonProp.setUser(user.password.email);
-		$location.path('/welcome');
+            CommonProp.setUser(user.password.email);
+            $location.path('/welcome');
         }, function(error) {
             //Failure callback
             console.log('Authentication failure');
@@ -35,7 +35,7 @@ angular.module('myApp.home', ['ngRoute','firebase'])
 }])
 .service('CommonProp', function() {
     var user = '';
- 
+    
     return {
         getUser: function() {
             return user;
