@@ -59,7 +59,7 @@
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
             </button>
-            <h4 class="modal-title" id="editModalLabel">Create Post</h4>
+            <h4 class="modal-title" id="editModalLabel">Create an Event/Memory</h4>
           </div>
           <div class="modal-body">
             <!-- Title -->
@@ -77,21 +77,7 @@
               </select>
             </div>
             <!-- /Privacy-->
-            <!-- Question 1 -->
-            <p>Is your memory or event location based?</p>
-            <div class="radio">
-              <label>
-                <input type="radio" name="createQ1" id="createQ1Op1" value="option1" ng-click="showme=true">
-                Yes
-              </label>
-            </div>
-            <div class="radio">
-              <label>
-                <input type="radio" name="createQ1" id="createQ1Op2" value="option2" ng-click="showme=false">
-                No
-              </label>
-            </div>
-            <!-- /Question 1 -->
+            
             <!-- event location -->
             <div class="form-group">
               <label class="control-label" for="startDate">Event/Memory Location</label>  
@@ -104,75 +90,21 @@
               </div>
             </div>
             <!-- /event location-->
-            <!-- your location -->
-            <div class="form-group">
-              <label class="control-label" for="startDate">Your Location</label>  
-              <input id="userLoc" name="userLoc" ng-model="article.userLoc" type="text" placeholder="Your Location" class="form-control input-md" required />
-              <div role="alert">
-               <span class="error" ng-show="myForm.input.$error.required">
-                   Required!</span>
-               <span class="error" ng-show="myForm.input.$error.date">
-                   Not a valid date!</span>
-              </div>
-            </div>
-            <!-- /event location-->
-            <!-- Question 2 -->
-            <div ng-show="showme" class="ng-hide">
-              <p>Were you physically present at the same location of the event/memory?</p>
-              <div class="radio">
-                <label>
-                  <input type="radio" name="createQ2" id="createQ2Op1" value="option1">
-                  Yes
-                </label>
-              </div>
-              <div class="radio">
-                <label>
-                  <input type="radio" name="createQ2" id="createQ2Op2" value="option2">
-                  No
-                </label>
-              </div>
-            </div>
-            <!-- /Question 2 -->
-            <!-- Question 3 -->
-            <p>Did it take place on a single day, or did it span multiple days?</p>
-            <div class="radio">
-              <label>
-                <input type="radio" name="createQ3" id="createQ3Op1" value="option1">
-                Single
-              </label>
-            </div>
-            <div class="radio">
-              <label>
-                <input type="radio" name="createQ3" id="createQ3Op2" value="option2">
-                Multiple
-              </label>
-            </div>
-            <!-- /Question 3 -->
-            <!-- startdate -->
-            <div class="form-group">
-              <label class="control-label" for="startDate">Start Date</label>  
-              <input id="startDate" name="startDate" ng-model="article.StartDate" type="date" placeholder="yyyy-MM-dd" class="form-control input-md" required />
-              <div role="alert">
-               <span class="error" ng-show="myForm.input.$error.required">
-                   Required!</span>
-               <span class="error" ng-show="myForm.input.$error.date">
-                   Not a valid date!</span>
-              </div>
-            </div>
-            <!-- /startdate-->
-            <!-- startdate -->
-            <div class="form-group">
-              <label class="control-label" for="endDate">End Date</label>  
-              <input id="endDate" name="endDate" ng-model="article.endDate" type="date" placeholder="yyyy-MM-dd" class="form-control input-md" required />
-              <div role="alert">
-               <span class="error" ng-show="myForm.input.$error.required">
-                   Required!</span>
-               <span class="error" ng-show="myForm.input.$error.date">
-                   Not a valid date!</span>
-              </div>
-            </div>
-            <!-- /startdate-->
             
+            
+            <!-- date -->
+            <div class="form-group">
+              <label class="control-label" for="eventDate">Event/Memory Date</label>  
+              <input id="eventDate" name="eventDate" ng-model="article.eventDate" type="date" placeholder="yyyy-MM-dd" class="form-control input-md" required />
+              <div role="alert">
+               <span class="error" ng-show="myForm.input.$error.required">
+                   Required!</span>
+               <span class="error" ng-show="myForm.input.$error.date">
+                   Not a valid date!</span>
+              </div>
+            </div>
+            <!-- /startdate-->
+
             <!-- Textarea -->
             <div class="form-group">
               <label class="control-label" for="txtPost">Full Details</label>   
