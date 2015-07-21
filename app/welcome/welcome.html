@@ -62,21 +62,120 @@
             <h4 class="modal-title" id="editModalLabel">Create Post</h4>
           </div>
           <div class="modal-body">
-            <!-- Text input-->
+            <!-- Title -->
             <div class="form-group">
               <label class="control-label" for="txtTitle">Title</label>  
-              <input id="txtTitle" name="txtTitle" ng-model="article.title" type="text" placeholder="placeholder" class="form-control input-md">
+              <input id="txtTitle" name="txtTitle" ng-model="article.title" type="text" placeholder="Title of event/memory" class="form-control input-md">
             </div>
+            <!-- /Title -->
             <!-- Privacy-->
             <div class="form-group">
-              <label class="control-label" for="privacyLevel">Privacy</label> 
-              <select class="form-control" ng-model="article.privacyLevel" id="privacyLevel" name="privacyLevel"><option>Private</option>
+              <label class="control-label" for="privacyLevel">Privacy Level</label> 
+              <select class="form-control input-md" ng-model="article.privacyLevel" id="privacyLevel" name="privacyLevel">
+                <option>Private</option>
                 <option>Public</option>
               </select>
             </div>
+            <!-- /Privacy-->
+            <!-- Question 1 -->
+            <p>Is your memory or event location based?</p>
+            <div class="radio">
+              <label>
+                <input type="radio" name="createQ1" id="createQ1Op1" value="option1" ng-click="showme=true">
+                Yes
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="createQ1" id="createQ1Op2" value="option2" ng-click="showme=false">
+                No
+              </label>
+            </div>
+            <!-- /Question 1 -->
+            <!-- event location -->
+            <div class="form-group">
+              <label class="control-label" for="startDate">Event/Memory Location</label>  
+              <input id="eventLoc" name="eventLoc" ng-model="article.eventLoc" type="text" placeholder="location" class="form-control input-md" required />
+              <div role="alert">
+               <span class="error" ng-show="myForm.input.$error.required">
+                   Required!</span>
+               <span class="error" ng-show="myForm.input.$error.date">
+                   Not a valid date!</span>
+              </div>
+            </div>
+            <!-- /event location-->
+            <!-- your location -->
+            <div class="form-group">
+              <label class="control-label" for="startDate">Your Location</label>  
+              <input id="userLoc" name="userLoc" ng-model="article.userLoc" type="text" placeholder="Your Location" class="form-control input-md" required />
+              <div role="alert">
+               <span class="error" ng-show="myForm.input.$error.required">
+                   Required!</span>
+               <span class="error" ng-show="myForm.input.$error.date">
+                   Not a valid date!</span>
+              </div>
+            </div>
+            <!-- /event location-->
+            <!-- Question 2 -->
+            <div ng-show="showme" class="ng-hide">
+              <p>Were you physically present at the same location of the event/memory?</p>
+              <div class="radio">
+                <label>
+                  <input type="radio" name="createQ2" id="createQ2Op1" value="option1">
+                  Yes
+                </label>
+              </div>
+              <div class="radio">
+                <label>
+                  <input type="radio" name="createQ2" id="createQ2Op2" value="option2">
+                  No
+                </label>
+              </div>
+            </div>
+            <!-- /Question 2 -->
+            <!-- Question 3 -->
+            <p>Did it take place on a single day, or did it span multiple days?</p>
+            <div class="radio">
+              <label>
+                <input type="radio" name="createQ3" id="createQ3Op1" value="option1">
+                Single
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="createQ3" id="createQ3Op2" value="option2">
+                Multiple
+              </label>
+            </div>
+            <!-- /Question 3 -->
+            <!-- startdate -->
+            <div class="form-group">
+              <label class="control-label" for="startDate">Start Date</label>  
+              <input id="startDate" name="startDate" ng-model="article.StartDate" type="date" placeholder="yyyy-MM-dd" class="form-control input-md" required />
+              <div role="alert">
+               <span class="error" ng-show="myForm.input.$error.required">
+                   Required!</span>
+               <span class="error" ng-show="myForm.input.$error.date">
+                   Not a valid date!</span>
+              </div>
+            </div>
+            <!-- /startdate-->
+            <!-- startdate -->
+            <div class="form-group">
+              <label class="control-label" for="endDate">End Date</label>  
+              <input id="endDate" name="endDate" ng-model="article.endDate" type="date" placeholder="yyyy-MM-dd" class="form-control input-md" required />
+              <div role="alert">
+               <span class="error" ng-show="myForm.input.$error.required">
+                   Required!</span>
+               <span class="error" ng-show="myForm.input.$error.date">
+                   Not a valid date!</span>
+              </div>
+            </div>
+            <!-- /startdate-->
+            
             <!-- Textarea -->
             <div class="form-group">
-              <label class="control-label" for="txtPost">Post</label>   
+              <label class="control-label" for="txtPost">Full Details</label>   
               <textarea class="form-control" id="txtPost" ng-model="article.post" name="txtPost" ></textarea>
             </div>
             <!-- Button -->
@@ -145,32 +244,32 @@
 
 
   <div class="container" ng-controller="AppCtrl as app">
-            <div class="form-signin">
-                <h3>Launch the AngularJS Wizard</h3>
+    <div class="form-signin">
+      <h3>Launch the AngularJS Wizard</h3>
 
-                <div class="thumbnail">
-                    <img src="images/nacho-libre.jpg" alt="Naaaaaaaaaaacho Libre!">
-                </div>
-                <button type="button" ng-click="app.open()" class="btn btn-large btn-primary ng-scope">
-                    I Dare You!
-                </button>
-                <div class="alert-container">
-                    <alert ng-if="app.reason" type="info" close="app.closeAlert()">{{app.reason}}</alert>
-                </div>
-                <div ng-if="app.summary">
-                    <hr/>
-                    <h3>Summary for {{app.summary.firstName}} {{app.summary.lastName}}</h3>
+      <div class="thumbnail">
+        <img src="images/nacho-libre.jpg" alt="Naaaaaaaaaaacho Libre!">
+      </div>
+      <button type="button" ng-click="app.open()" class="btn btn-large btn-primary ng-scope">
+        I Dare You!
+      </button>
+      <div class="alert-container">
+        <alert ng-if="app.reason" type="info" close="app.closeAlert()">{{app.reason}}</alert>
+      </div>
+      <div ng-if="app.summary">
+        <hr/>
+        <h3>Summary for {{app.summary.firstName}} {{app.summary.lastName}}</h3>
 
-                    <p><strong>Coming: </strong>{{app.summary.coming}}</p>
+        <p><strong>Coming: </strong>{{app.summary.coming}}</p>
 
-                    <p><strong>Tacos: </strong>{{app.summary.tacos}}</p>
+        <p><strong>Tacos: </strong>{{app.summary.tacos}}</p>
 
-                    <p><strong>Toppings:</strong></p>
+        <p><strong>Toppings:</strong></p>
 
-                    <div class="badge badge-success pull-left" ng-repeat="topping in app.summary.toppings">{{topping}}
-                    </div>
-                </div>
-            </div>
+        <div class="badge badge-success pull-left" ng-repeat="topping in app.summary.toppings">{{topping}}
         </div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
