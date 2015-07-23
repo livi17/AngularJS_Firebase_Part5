@@ -31,6 +31,8 @@ angular.module('myApp.welcome', ['ngRoute','ngAnimate','ui.bootstrap'])
     article.$update({
       title: $scope.postToUpdate.title,
       privacyLevel: $scope.postToUpdate.privacyLevel,
+      eventLoc: $scope.postToUpdate.eventLoc,
+      eventDate: $scope.postToUpdate.eventDate,
       post: $scope.postToUpdate.post,
       emailId: $scope.postToUpdate.emailId
     }).then(function(ref) {
@@ -59,15 +61,21 @@ angular.module('myApp.welcome', ['ngRoute','ngAnimate','ui.bootstrap'])
 
   $scope.AddPost = function(){
     console.log("This was called.");
-
     var title = $scope.article.title;
     var privacyLevel = $scope.article.privacyLevel;
+    var eventLoc = $scope.article.eventLoc;
+    var eventDate = $scope.article.eventDate;
     var post = $scope.article.post;
 
     var firebaseObj = new Firebase("https://yyear.firebaseio.com/Articles");
     var fb = $firebase(firebaseObj);
 
-    fb.$push({ title: title, privacyLevel: privacyLevel, post: post,emailId: CommonProp.getUser() }).then(function(ref) {
+    fb.$push({ title: title, 
+      privacyLevel: privacyLevel, 
+      eventLoc: eventLoc, 
+      eventDate: eventDate, 
+      post: post,emailId: 
+      CommonProp.getUser() }).then(function(ref) {
       console.log(ref); 
     //$location.path('/welcome');
   }).then(function(ref) {
@@ -102,53 +110,36 @@ angular.module('myApp.welcome', ['ngRoute','ngAnimate','ui.bootstrap'])
                 });
         };
     })
-    .controller('ModalCtrl', function ($modalInstance) {
-        var modal = this;
 
-        modal.steps = ['one', 'two', 'three'];
-        modal.step = 0;
-        modal.wizard = {tacos: 2};
+.controller('MapController', function($scope){
+  google.maps.event.addDomListener(window, "load", function(){
 
-        modal.isFirstStep = function () {
-            return modal.step === 0;
-        };
-
-        modal.isLastStep = function () {
-            return modal.step === (modal.steps.length - 1);
-        };
-
-        modal.isCurrentStep = function (step) {
-            return modal.step === step;
-        };
-
-        modal.setCurrentStep = function (step) {
-            modal.step = step;
-        };
-
-        modal.getCurrentStep = function () {
-            return modal.steps[modal.step];
-        };
-
-        modal.getNextLabel = function () {
-            return (modal.isLastStep()) ? 'Submit' : 'Next';
-        };
-
-        modal.handlePrevious = function () {
-            modal.step -= (modal.isFirstStep()) ? 0 : 1;
-        };
-
-        modal.handleNext = function () {
-            if (modal.isLastStep()) {
-                $modalInstance.close(modal.wizard);
-            } else {
-                modal.step += 1;
-            }
-        };
-
-        modal.dismiss = function(reason) {
-            $modalInstance.dismiss(reason);
-        };
+    var geocoder = new google.maps.Geocoder();
+     geocoder.geocode( { "address": $scope.article.eventLoc }, function(results, status) {
+         if (status == google.maps.GeocoderStatus.OK && results.length > 0) {
+             var location = results[0].geometry.location;
+             $scope.myMap.panTo(location);
+         }
     });
+
+    var myLatLng = new google.maps.LatLng(43.7182412,-79.378058);
+    var mapOptions = {
+      center: myLatLng,
+      zoom: 11,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+
+    var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+    navigator.geolocation.getCurrentPosition(function(pos){
+      map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
+    });
+
+    $scope.map = map;
+
+  });
+
+});
 
 
 
